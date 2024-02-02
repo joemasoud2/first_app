@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frist_app/screens/welcome_page.dart';
+import 'package:frist_app/screens/home_page.dart';
 import 'package:frist_app/widgets/buttoms.dart';
 
 class signInpage extends StatefulWidget {
@@ -62,15 +62,15 @@ class _signInpageState extends State<signInpage> {
               label: 'Log in',
               color: Colors.blue,
               onTap: () {
-                // if (_formKey.currentState!.validate()) {
-                //   print("log in successfully");
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const WelcomePge()),
-                );
-                // } else {
-                //   return null;
-                // }
+                if (_formKey.currentState!.validate()) {
+                  print("log in successfully");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const WelcomePge()),
+                  );
+                } else {
+                  return null;
+                }
               },
             ),
             const SizedBox(height: 30),
