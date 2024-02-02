@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "H:/WORK/programing/fluter/frist app/linux"
+    "cmake.sourceDirectory": "H:/WORK/programing/fluter/frist app/first_app/linux",
+    "files.exclude": {
+        ".**": true
+    }
 }

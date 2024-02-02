@@ -3,9 +3,7 @@ import 'package:frist_app/screens/welcome_page.dart';
 import 'package:frist_app/widgets/buttoms.dart';
 
 class signInpage extends StatefulWidget {
-  const signInpage({super.key, required this.title});
-
-  final String title;
+  const signInpage({super.key});
 
   @override
   State<signInpage> createState() => _signInpageState();
@@ -64,15 +62,15 @@ class _signInpageState extends State<signInpage> {
               label: 'Log in',
               color: Colors.blue,
               onTap: () {
-                if (_formKey.currentState!.validate()) {
-                  print("log in successfully");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const WelcomePge()),
-                  );
-                } else {
-                  return null;
-                }
+                // if (_formKey.currentState!.validate()) {
+                //   print("log in successfully");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const WelcomePge()),
+                );
+                // } else {
+                //   return null;
+                // }
               },
             ),
             const SizedBox(height: 30),
