@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class itemCard extends StatelessWidget {
-  final String prouductName;
-  const itemCard({super.key, required this.prouductName});
+  final String productName;
+  const itemCard({super.key, required this.productName});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class itemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.shopify_sharp),
-            Text(prouductName),
+            Text(productName),
             Text("500\$"),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.15,

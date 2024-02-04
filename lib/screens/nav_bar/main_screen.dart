@@ -15,10 +15,10 @@ class _mainPageState extends State<mainPage> {
     return ListView.separated(
       itemCount: productNames.length,
       itemBuilder: (BuildContext context, int index) {
-        return itemCard(prouductName: productNames[index]);
+        return itemCard(productName: productNames[index]);
       },
       separatorBuilder: (BuildContext context, int index) {
-        return Divider();
+        return itemCard(productName: productNames[index]);
       },
     );
   }

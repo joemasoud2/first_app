@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frist_app/screens/home_page.dart';
 import 'package:frist_app/widgets/buttoms.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class signInpage extends StatefulWidget {
   const signInpage({super.key});
@@ -11,6 +12,8 @@ class signInpage extends StatefulWidget {
 
 class _signInpageState extends State<signInpage> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController PhoneNumberController = TextEditingController();
+  TextEditingController PasswordConrroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +29,10 @@ class _signInpageState extends State<signInpage> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextFormField(
+                controller: PhoneNumberController,
                 keyboardType: TextInputType.phone,
                 validator: (value) {
-                  String pattern = r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}';
+                  String pattern = r'^(/+201|01|00201)[0-2,5]{1}[0-9]{8}';
                   RegExp regex = new RegExp(pattern);
                   if (!regex.hasMatch(value!)) {
                     return null;
@@ -45,6 +49,7 @@ class _signInpageState extends State<signInpage> {
               padding: const EdgeInsets.all(10),
               child: TextFormField(
                 decoration: const InputDecoration(label: Text('Password')),
+                controller: PasswordConrroller,
                 validator: (value) {
                   String pattern =
                       r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
@@ -61,13 +66,21 @@ class _signInpageState extends State<signInpage> {
             AppButton(
               label: 'Log in',
               color: Colors.blue,
-              onTap: () {
+              onTap: () async {
                 if (_formKey.currentState!.validate()) {
                   print("log in successfully");
+
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.setString(
+                      'Phone_Number', PhoneNumberController.text);
+                  await prefs.setString(
+                      'Phone_Number', PhoneNumberController.text);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const WelcomePge()),
-                  );
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomePage()));
+                  PasswordConrroller.clear();
                 } else {
                   return null;
                 }
