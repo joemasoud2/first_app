@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frist_app/screens/home_page.dart';
-import 'package:frist_app/widgets/buttoms.dart';
+import 'package:frist_app/views/screens/home_page.dart';
+import 'package:frist_app/views/widgets/buttoms.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class signInpage extends StatefulWidget {
@@ -35,9 +35,9 @@ class _signInpageState extends State<signInpage> {
                   String pattern = r'^(/+201|01|00201)[0-2,5]{1}[0-9]{8}';
                   RegExp regex = new RegExp(pattern);
                   if (!regex.hasMatch(value!)) {
-                    return null;
-                  } else {
                     return 'enter valid phone number';
+                  } else {
+                    return null;
                   }
                 },
                 decoration: const InputDecoration(
@@ -76,10 +76,10 @@ class _signInpageState extends State<signInpage> {
                       'Phone_Number', PhoneNumberController.text);
                   await prefs.setString(
                       'Phone_Number', PhoneNumberController.text);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
                   PasswordConrroller.clear();
                 } else {
                   return null;

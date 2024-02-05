@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frist_app/app_settings.dart';
-import 'package:frist_app/screens/home_page.dart';
-import 'package:frist_app/screens/sign_in.dart';
+import 'package:frist_app/views/screens/home_page.dart';
+import 'package:frist_app/views/screens/sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,12 +25,12 @@ class _SplashScreenState extends State<SplashScreen> {
     if (userPhoneNumber == null) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => signInpage()),
+        MaterialPageRoute(builder: (context) => const signInpage()),
       );
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     }
   }
