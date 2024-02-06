@@ -1,91 +1,88 @@
-class ProductsModel {
+class UserModel {
+  int? id;
   List<Product>? products;
   int? total;
-  int? skip;
-  int? limit;
+  int? discountedTotal;
+  int? userId;
+  int? totalProducts;
+  int? totalQuantity;
 
-  ProductsModel({
+  UserModel({
+    this.id,
     this.products,
     this.total,
-    this.skip,
-    this.limit,
+    this.discountedTotal,
+    this.userId,
+    this.totalProducts,
+    this.totalQuantity,
   });
 
-  factory ProductsModel.fromJson(Map<String, dynamic> json) => ProductsModel(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        id: json["id"],
         products: json["products"] == null
             ? []
             : List<Product>.from(
                 json["products"]!.map((x) => Product.fromJson(x))),
         total: json["total"],
-        skip: json["skip"],
-        limit: json["limit"],
+        discountedTotal: json["discountedTotal"],
+        userId: json["userId"],
+        totalProducts: json["totalProducts"],
+        totalQuantity: json["totalQuantity"],
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "products": products == null
             ? []
             : List<dynamic>.from(products!.map((x) => x.toJson())),
         "total": total,
-        "skip": skip,
-        "limit": limit,
+        "discountedTotal": discountedTotal,
+        "userId": userId,
+        "totalProducts": totalProducts,
+        "totalQuantity": totalQuantity,
       };
 }
 
 class Product {
   int? id;
   String? title;
-  String? description;
   int? price;
+  int? quantity;
+  int? total;
   double? discountPercentage;
-  double? rating;
-  int? stock;
-  String? brand;
-  String? category;
+  int? discountedPrice;
   String? thumbnail;
-  List<String>? images;
 
   Product({
     this.id,
     this.title,
-    this.description,
     this.price,
+    this.quantity,
+    this.total,
     this.discountPercentage,
-    this.rating,
-    this.stock,
-    this.brand,
-    this.category,
+    this.discountedPrice,
     this.thumbnail,
-    this.images,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         title: json["title"],
-        description: json["description"],
         price: json["price"],
+        quantity: json["quantity"],
+        total: json["total"],
         discountPercentage: json["discountPercentage"]?.toDouble(),
-        rating: json["rating"]?.toDouble(),
-        stock: json["stock"],
-        brand: json["brand"],
-        category: json["category"],
+        discountedPrice: json["discountedPrice"],
         thumbnail: json["thumbnail"],
-        images: json["images"] == null
-            ? []
-            : List<String>.from(json["images"]!.map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "description": description,
         "price": price,
+        "quantity": quantity,
+        "total": total,
         "discountPercentage": discountPercentage,
-        "rating": rating,
-        "stock": stock,
-        "brand": brand,
-        "category": category,
+        "discountedPrice": discountedPrice,
         "thumbnail": thumbnail,
-        "images":
-            images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
       };
 }

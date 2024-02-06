@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frist_app/app_settings.dart';
 import 'package:frist_app/core/settings_util.dart';
+import 'package:frist_app/views/screens/cart_page.dart';
 import 'package:frist_app/views/screens/nav_bar/categories.dart';
 import 'package:frist_app/views/screens/nav_bar/main_screen.dart';
 import 'package:frist_app/views/screens/nav_bar/settings.dart';
-import 'package:frist_app/views/screens/sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   // final String phoneNumber;
@@ -94,11 +92,17 @@ class _HomePageState extends State<HomePage> {
                   title: Text("Add product"),
                 )),
             InkWell(
-                onTap: () async {},
-                child: const ListTile(
-                  leading: Icon(Icons.shopping_bag),
-                  title: Text("Cart"),
-                )),
+              child: const ListTile(
+                leading: Icon(Icons.shopping_bag),
+                title: Text("Cart"),
+              ),
+              onTap: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CartPage()),
+                );
+              },
+            ),
             InkWell(
                 onTap: () async {},
                 child: const ListTile(
