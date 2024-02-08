@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:frist_app/app_settings.dart';
 import 'package:frist_app/views/screens/sign_in.dart';
@@ -25,7 +27,8 @@ class SettingsUtil {
               onPressed: () async {
                 final SharedPreferences prefs =
                     await SharedPreferences.getInstance();
-                await prefs.remove(AppSettings.phoneNumberSharedPrefsKey);
+                await prefs.remove(AppSettings.EmailSharedPrefsKey);
+                await FirebaseAuth.instance.signOut();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const signInpage()),
@@ -44,8 +47,8 @@ class SettingsUtil {
     );
   }
 
-  static Future<String> getCachedUserPhone() async {
+  static Future<String> getCachedUserEmail() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(AppSettings.phoneNumberSharedPrefsKey) ?? "--";
+    return prefs.getString(AppSettings.EmailSharedPrefsKey) ?? "--";
   }
 }

@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> handleLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? userPhoneNumber =
-        prefs.getString(AppSettings.phoneNumberSharedPrefsKey);
+        prefs.getString(AppSettings.EmailSharedPrefsKey);
     if (userPhoneNumber == null) {
       Navigator.pushReplacement(
         context,

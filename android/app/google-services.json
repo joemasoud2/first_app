@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "476776498617",
+    "project_id": "frist-app-in-flutter",
+    "storage_bucket": "frist-app-in-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476776498617:android:d570d1c1e8e2f6b063a268",
+        "android_client_info": {
+          "package_name": "com.example.frist_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHucwLAjwV_K83-CUpqaFig0gMZCWtus4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

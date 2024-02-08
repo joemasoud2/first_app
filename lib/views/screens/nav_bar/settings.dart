@@ -19,9 +19,9 @@ class _settingsPageState extends State<settingsPage> {
   }
 
   Future<void> getUserPhoneNumber() async {
-    // final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // userPhone = prefs.getString(AppSettings.phoneNumberSharedPrefsKey) ?? "--";
-    userPhone = await SettingsUtil.getCachedUserPhone();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    userPhone = prefs.getString(AppSettings.EmailSharedPrefsKey) ?? "--";
+    userPhone = (await SettingsUtil.getCachedUserEmail());
     setState(() {});
   }
 

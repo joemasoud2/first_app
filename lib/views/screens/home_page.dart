@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:frist_app/core/settings_util.dart';
+import 'package:frist_app/views/screens/add_category.dart';
 import 'package:frist_app/views/screens/cart_page.dart';
 import 'package:frist_app/views/screens/nav_bar/categories.dart';
 import 'package:frist_app/views/screens/nav_bar/main_screen.dart';
@@ -17,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int pageIndex = 0;
-  String phoneNumber = "";
+  String Email = "";
   List<Widget> pages = [
     const MainScreen(),
     const categoriesPage(),
@@ -26,11 +29,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getPhoneNumber();
+    getEmail();
   }
 
-  Future<void> getPhoneNumber() async {
-    phoneNumber = await SettingsUtil.getCachedUserPhone();
+  Future<void> getEmail() async {
+    Email = await SettingsUtil.getCachedUserEmail();
     setState(() {});
   }
 
@@ -74,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Phone: $phoneNumber")],
+                    children: [Text("Email: $Email")],
                   )
                 ],
               ),
@@ -86,10 +89,15 @@ class _HomePageState extends State<HomePage> {
                   title: Text("Profile"),
                 )),
             InkWell(
-                onTap: () async {},
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddCategoryPage()));
+                },
                 child: const ListTile(
                   leading: Icon(Icons.add_shopping_cart),
-                  title: Text("Add product"),
+                  title: Text("Add category"),
                 )),
             InkWell(
               child: const ListTile(

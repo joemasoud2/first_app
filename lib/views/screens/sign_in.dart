@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frist_app/core/firebase_Auth_util.dart';
+import 'package:frist_app/service/cart_service.dart';
 import 'package:frist_app/views/screens/home_page.dart';
 import 'package:frist_app/views/widgets/buttoms.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,8 +16,9 @@ class signInpage extends StatefulWidget {
 
 class _signInpageState extends State<signInpage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController PhoneNumberController = TextEditingController();
+  TextEditingController EmailController = TextEditingController();
   TextEditingController PasswordConrroller = TextEditingController();
+  bool isloading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,25 +34,25 @@ class _signInpageState extends State<signInpage> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextFormField(
-                controller: PhoneNumberController,
-                keyboardType: TextInputType.phone,
+                controller: EmailController,
                 validator: (value) {
-                  String pattern = r'^(/+201|01|00201)[0-2,5]{1}[0-9]{8}';
+                  String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
                   RegExp regex = new RegExp(pattern);
                   if (!regex.hasMatch(value!)) {
-                    return 'enter valid phone number';
+                    return 'enter valid Email';
                   } else {
                     return null;
                   }
                 },
                 decoration: const InputDecoration(
-                  label: Text("Phone Number"),
+                  label: Text("Email"),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextFormField(
+                obscureText: true,
                 decoration: const InputDecoration(label: Text('Password')),
                 controller: PasswordConrroller,
                 validator: (value) {
@@ -63,29 +68,45 @@ class _signInpageState extends State<signInpage> {
               ),
             ),
             const SizedBox(height: 30),
-            AppButton(
-              label: 'Log in',
-              color: Colors.blue,
-              onTap: () async {
-                if (_formKey.currentState!.validate()) {
-                  print("log in successfully");
-
-                  final SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  await prefs.setString(
-                      'Phone_Number', PhoneNumberController.text);
-                  await prefs.setString(
-                      'Phone_Number', PhoneNumberController.text);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
-                  PasswordConrroller.clear();
-                } else {
-                  return null;
-                }
-              },
-            ),
+            isloading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : AppButton(
+                    label: 'Log in',
+                    color: Colors.blue,
+                    onTap: () async {
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          bool isLoggedIn = false;
+                          isloading = true;
+                          setState(() {});
+                          bool loginResult = await firebaseAuthUtil.loginIn(
+                              email: EmailController.text,
+                              password: PasswordConrroller.text);
+                          if (loginResult) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()));
+                          } else {
+                            var snackBar = const SnackBar(
+                                content:
+                                    Text("Email or password is not correct"));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        } catch (e) {
+                          isloading = false;
+                          setState(() {});
+                          var snackbar = SnackBar(
+                            content: Text(e.toString()),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                        }
+                      }
+                    },
+                  ),
             const SizedBox(height: 30),
             const Text(
               'Forgot password?No yawa. Tap me.',
